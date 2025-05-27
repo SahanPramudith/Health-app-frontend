@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-bold">👨‍⚕️ Patient Management</h2>
         <div>
-            <button type="button"
+            <button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
                 class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-4 py-2">
                 + Add Patient
             </button>
@@ -37,5 +37,124 @@
                 <!-- Repeat rows dynamically -->
             </tbody>
         </table>
+    </div>
+</div>
+
+<!-- Main modal -->
+<div id="authentication-modal" tabindex="-1" aria-hidden="true"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+            <!-- Modal header -->
+            <div
+                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Sign in to our platform
+                </h3>
+                <button type="button"
+                    class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-hide="authentication-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form [formGroup]="patientForm" (ngSubmit)="onSubmit()" class="max-w-sm mx-auto">
+                <div class="mb-5">
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full
+                        Name</label>
+                    <input formControlName="fullName" type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                    focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+                    dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+                    dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John Doe"
+                        required />
+                    <div class="text-red-500 text-sm mt-1"
+                        *ngIf="patientForm.get('fullName')?.invalid && patientForm.get('fullName')?.touched">
+                        Full Name is required.
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <label for="age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Age</label>
+                    <input formControlName="age" type="number" id="age" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                        focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+                        dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+                        dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="30"
+                        required />
+                    <div class="text-red-500 text-sm mt-1"
+                        *ngIf="patientForm.get('age')?.invalid && patientForm.get('age')?.touched">
+                        Age is required and must be a valid number.
+                    </div>
+
+                </div>
+
+                <div class="mb-5">
+                    <label for="gender"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
+                    <select formControlName="gender" id="gender" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                        focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+                        dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+                        dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <option value="" disabled selected>Select gender</option>
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
+                        <option value="OTHER">Other</option>
+                    </select>
+                </div>
+
+                <div class="mb-5">
+                    <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact
+                        Number</label>
+                    <input formControlName="phone" type="tel" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                            focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+                            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+                            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="+94771234567" required />
+                    <div class="text-red-500 text-sm mt-1"
+                        *ngIf="patientForm.get('phone')?.invalid && patientForm.get('phone')?.touched">
+                        Contact Number is required and must be a valid phone number.
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email
+                    </label>
+                    <input formControlName="email" type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                            focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+                            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+                            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="email@example.com" />
+                    <div class="text-red-500 text-sm mt-1"
+                        *ngIf="patientForm.get('email')?.invalid && patientForm.get('email')?.touched">
+                        Email must be a valid email address.
+
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <label for="address"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
+                    <textarea formControlName="address" id="address" rows="2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                        focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+                        dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+                        dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="123, Main Street, Matara" required></textarea>
+                    <div class="text-danger txt-sm mt-1 "
+                        *ngIf="patientForm.get('address')?.invalid && patientForm.get('address')?.touched">
+                        Address is required.
+                    </div>
+                </div>
+
+                <button type="submit" class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none 
+                    focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 
+                    dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">Register Patient</button>
+            </form>
+
+        </div>
     </div>
 </div>
