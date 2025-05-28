@@ -18,9 +18,14 @@ export class PatientManagementComponent {
       fullName: ['', Validators.required],
       age: ['', [Validators.required, Validators.min(0)]],
       gender: ['', Validators.required],
-      phone: ['', Validators.required],
+      contact: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
+      nic: ['', [Validators.required,] ], 
+      bloodGroup: ['',[Validators.required, Validators.pattern('^(A|B|AB|O)[+-]$')]],
+      category: [''],
+      note: [''],
+      allergic: ['No', [Validators.required, Validators.pattern('^(Yes|No)$')]],
     });
   }
 
