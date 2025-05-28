@@ -1,10 +1,11 @@
 import { NgClass, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RegistePateintService } from '../../services/Patient/registe-pateint.service';
 
 @Component({
   selector: 'app-patient-management',
-  imports: [ReactiveFormsModule,NgIf,NgClass ],
+  imports: [ReactiveFormsModule, NgIf, NgClass],
   templateUrl: './patient-management.component.html',
   styleUrl: './patient-management.component.css'
 })
@@ -12,7 +13,7 @@ export class PatientManagementComponent {
 
   patientForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private registerPatientService: RegistePateintService) {
     this.patientForm = this.fb.group({
       fullName: ['', Validators.required],
       age: ['', [Validators.required, Validators.min(0)]],
@@ -30,10 +31,14 @@ export class PatientManagementComponent {
     return this.patientForm.get('age');
   }
 
-
-
   onSubmit() {
-    console.log(this.patientForm);
+    console.log('Form submitted', this.patientForm.value);
+    this.registerPatientService.registerPatient(this.patientForm.value).subscribe({
+      next: (response) => {
+        console.log('Patient registered successfully', response);
+        this.patientForm.reset();
+      }
+    })
   }
-    
+
 }
