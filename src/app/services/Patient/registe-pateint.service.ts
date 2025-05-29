@@ -17,4 +17,8 @@ export class RegistePateintService {
   getAllPatients(): Observable<any[]> {
     return this.http.get<any[]>('http://localhost:8080/patient/getPatient')
   }
+
+  deletePatient(patientId: number): Observable<any> {
+    return this.http.delete(`http://localhost:8080/patient/${patientId}`);
+  }
 }

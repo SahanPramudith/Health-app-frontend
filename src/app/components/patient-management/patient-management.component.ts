@@ -48,6 +48,7 @@ export class PatientManagementComponent {
     this.registerPatientService.registerPatient(this.patientForm.value).subscribe({
       next: (response) => {
         console.log('Patient registered successfully', response);
+         this.loadPatients();
         this.patientForm.reset();
       }
     })
@@ -61,5 +62,18 @@ export class PatientManagementComponent {
       },
       error: (err) => console.error('Failed to fetch patients', err)
     });
+  }
+
+  deletePatient(patientId: number) {
+    if (confirm('Are you sure you want to delete this patient?')) {
+      this.registerPatientService.deletePatient(patientId).subscribe({
+        next: (response) => {
+          console.log('Patient deleted successfully', response);
+          this.loadPatients(); // Refresh the patient list after deletion
+        }
+        , error: (err) => console.error('Failed to delete patient', err)
+      });
+
+    }
   }
 }
