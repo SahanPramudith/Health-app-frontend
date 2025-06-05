@@ -21,4 +21,7 @@ export class RegistePateintService {
   deletePatient(patientId: number): Observable<any> {
     return this.http.delete(`http://localhost:8080/patient/${patientId}`);
   }
+  updatePatient(patient: any) {
+    return this.http.put(`http://localhost:8080/patient/update`, patient);
+  }
 }

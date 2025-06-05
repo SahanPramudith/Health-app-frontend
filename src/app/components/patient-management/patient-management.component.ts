@@ -1,18 +1,22 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegistePateintService } from '../../services/Patient/registe-pateint.service';
 
 @Component({
   selector: 'app-patient-management',
-  imports: [ReactiveFormsModule, NgIf, NgClass, NgFor],
+  imports: [ReactiveFormsModule, NgIf, NgClass, NgFor,],
   templateUrl: './patient-management.component.html',
   styleUrl: './patient-management.component.css'
 })
-export class PatientManagementComponent {
+export class PatientManagementComponent implements OnInit {
 
   patientForm!: FormGroup;
   patients: any[] = [];
+
+  showModal = false;
+  modalTitle = 'Register Patient';
+  selectedPatientId: number | null = null;
 
   ngOnInit() {
     this.loadPatients();
@@ -44,14 +48,32 @@ export class PatientManagementComponent {
   }
 
   onSubmit() {
-    console.log('Form submitted', this.patientForm.value);
-    this.registerPatientService.registerPatient(this.patientForm.value).subscribe({
-      next: (response) => {
-        console.log('Patient registered successfully', response);
-         this.loadPatients();
-        this.patientForm.reset();
-      }
-    })
+    const formValue = this.patientForm.value;
+    const patientData = {
+      ...formValue,
+      name: formValue.fullName, // map fullName to name
+    };
+    delete patientData.fullName;
+
+    if (this.selectedPatientId) {
+      patientData.id = this.selectedPatientId;
+      this.registerPatientService.updatePatient(patientData).subscribe({
+        next: () => {
+          this.loadPatients();
+          this.closeModal();
+          this.patientForm.reset({ allergic: 'No' });
+          this.selectedPatientId = null;
+        }
+      });
+    } else {
+      this.registerPatientService.registerPatient(patientData).subscribe({
+        next: () => {
+          this.loadPatients();
+          this.closeModal();
+          this.patientForm.reset({ allergic: 'No' });
+        }
+      });
+    }
   }
 
   loadPatients() {
@@ -75,5 +97,35 @@ export class PatientManagementComponent {
       });
 
     }
+  }
+
+  openAddModal() {
+    this.modalTitle = 'Register Patient';
+    this.selectedPatientId = null;
+    this.patientForm.reset({ allergic: 'No' }); // Reset form and set default
+    this.showModal = true;
+  }
+
+  openUpdateModal(patient: any) {
+    this.modalTitle = 'Update Patient';
+    this.selectedPatientId = patient.id;
+    this.patientForm.patchValue({
+      fullName: patient.name, // map name to fullName
+      age: patient.age,
+      gender: patient.gender,
+      contact: patient.contact,
+      email: patient.email,
+      address: patient.address,
+      nic: patient.nic,
+      bloodGroup: patient.bloodGroup,
+      category: patient.category,
+      note: patient.note,
+      allergic: patient.allergic,
+    });
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
   }
 }
