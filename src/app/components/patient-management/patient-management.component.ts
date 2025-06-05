@@ -2,6 +2,7 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegistePateintService } from '../../services/Patient/registe-pateint.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-patient-management',
@@ -87,16 +88,28 @@ export class PatientManagementComponent implements OnInit {
   }
 
   deletePatient(patientId: number) {
-    if (confirm('Are you sure you want to delete this patient?')) {
-      this.registerPatientService.deletePatient(patientId).subscribe({
-        next: (response) => {
-          console.log('Patient deleted successfully', response);
-          this.loadPatients(); // Refresh the patient list after deletion
-        }
-        , error: (err) => console.error('Failed to delete patient', err)
-      });
-
-    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this patient!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.registerPatientService.deletePatient(patientId).subscribe({
+          next: (response) => {
+            Swal.fire('Deleted!', 'Patient has been deleted.', 'success');
+            this.loadPatients();
+          },
+          error: (err) => {
+            Swal.fire('Error!', 'Failed to delete patient.', 'error');
+            console.error('Failed to delete patient', err);
+          }
+        });
+      }
+    });
   }
 
   openAddModal() {
