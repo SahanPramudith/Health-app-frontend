@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 import { PatientManagementComponent } from './components/patient-management/patient-management.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
-import { AppointmentFormComponent } from './appointment-form/appointment-form.component';
+import { AppointmentFormComponent } from './components/appointment-form/appointment-form.component';
+//import { AppointmentFormComponent } from './components/appointment-form/appointment-form.component';
 
 export const routes: Routes = [
     {
