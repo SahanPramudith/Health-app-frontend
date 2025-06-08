@@ -18,5 +18,8 @@ export const routes: Routes = [
         path: 'dashboardCard',
         component:DashboardCardsComponent
     },
-    
+    {
+        path: '',
+        component:DashboardCardsComponent
+    },
 ];
