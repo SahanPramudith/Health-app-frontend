@@ -1,0 +1,85 @@
+
+
+
+<!-- Upload Patient Report Card -->
+<div class="bg-gray-100 rounded-lg shadow p-8 max-w-xl mx-auto">
+  <div class="flex items-center mb-2">
+    <svg class="w-6 h-6 text-blue-600 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2a2 2 0 012-2h2a2 2 0 012 2v2m-6 4h6a2 2 0 002-2V7a2 2 0 00-2-2h-1.5a1 1 0 01-.7-.3l-1.5-1.4a1 1 0 00-.7-.3H9a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+    </svg>
+    <span class="font-semibold text-blue-800 text-lg">Upload Patient Report</span>
+  </div>
+  <p class="text-gray-500 mb-6">Select a patient and upload their medical report</p>
+  <form>
+    <!-- Select Patient -->
+    <div class="mb-5">
+      <label class="block mb-1 font-medium text-gray-700 flex items-center">
+        <svg class="w-4 h-4 mr-1 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        Select Patient
+      </label>
+      <select class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+        <option>Choose a patient...</option>
+        <!-- Add patient options here -->
+      </select>
+    </div>
+    <!-- Report Category -->
+    <div class="mb-5">
+      <label class="block mb-1 font-medium text-gray-700 flex items-center">
+        <svg class="w-4 h-4 mr-1 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2a2 2 0 012-2h2a2 2 0 012 2v2m-6 4h6a2 2 0 002-2V7a2 2 0 00-2-2h-1.5a1 1 0 01-.7-.3l-1.5-1.4a1 1 0 00-.7-.3H9a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        Report Category
+      </label>
+      <input type="text" placeholder="e.g., Blood Test, X-Ray, MRI, Lab Results"
+        class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+    </div>
+    <!-- Upload Report File -->
+    <div class="mb-5">
+      <label class="block mb-1 font-medium text-gray-700 flex items-center">
+        <svg class="w-4 h-4 mr-1 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10V6a5 5 0 0110 0v4"/>
+        </svg>
+        Upload Report File
+      </label>
+      <!-- Flowbite file input (drag & drop style) -->
+      <div class="flex items-center justify-center w-full">
+        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed rounded-lg cursor-pointer bg-gray-50 border-gray-300 hover:bg-gray-100">
+          <div class="flex flex-col items-center justify-center pt-5 pb-6">
+            <svg class="w-8 h-8 mb-3 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 16v-4m0 0V8m0 4h4m-4 0H8m8 4v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2"/>
+            </svg>
+            <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+            <p class="text-xs text-gray-500">PDF, DOC, DOCX, JPG, PNG (MAX. 10MB)</p>
+          </div>
+          <input id="dropzone-file" type="file" class="hidden" />
+        </label>
+      </div>
+    </div>
+    <!-- Upload Button -->
+    <div class="flex justify-end">
+      <button type="submit" class="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-medium rounded-lg px-6 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+        Upload Report
+      </button>
+    </div>
+  </form>
+</div><br>
+<!-- Upload Guidelines Card -->
+<div class="bg-blue-50 rounded-lg p-6 mb-8">
+  <div class="flex items-center mb-2">
+    <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z"/>
+    </svg>
+    <span class="font-semibold text-blue-800 text-lg">Upload Guidelines</span>
+  </div>
+  <ul class="list-disc pl-6 text-blue-700 space-y-1">
+    <li>Ensure patient information is clearly visible in the report</li>
+    <li>File size should not exceed 10MB</li>
+    <li>Supported formats: PDF, DOC, DOCX, JPG, PNG</li>
+    <li>Reports will be automatically processed and categorized</li>
+  </ul>
+</div>

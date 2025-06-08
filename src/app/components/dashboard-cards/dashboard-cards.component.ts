@@ -23,7 +23,7 @@ export class DashboardCardsComponent implements OnInit {
     })
   }
 
-  activeTab = 'dashboard';
+  activeTab = 'patients';
 
   selectTab(event: Event) {
     const value = (event.target as HTMLSelectElement).value;

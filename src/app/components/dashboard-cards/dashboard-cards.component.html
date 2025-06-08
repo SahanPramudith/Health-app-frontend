@@ -10,11 +10,11 @@
 
 <!-- Tabs (Desktop) -->
 <ul class="hidden text-sm font-medium text-center text-gray-500 rounded-lg sm:flex mb-4">
-    <li class="w-full">
+    <!-- <li class="w-full">
         <button (click)="activeTab='dashboard'" class="w-full p-4 rounded-s-lg"
             [ngClass]="{'bg-blue-600 text-white': activeTab==='dashboard'}">Dashboard</button>
-    </li>
-    <li class="w-full">
+    </li> -->
+    <li class="w-full ">
         <button (click)="activeTab='patients'" class="w-full p-4"
             [ngClass]="{'bg-blue-600 text-white': activeTab==='patients'}">Patients</button>
     </li>
@@ -25,10 +25,6 @@
 </ul>
 
 <!-- Tab Content -->
-<div *ngIf="activeTab==='dashboard'">
-    <h2 class="text-xl font-semibold mb-2">📊 Dashboard Summary</h2>
-    <!-- Dashboard data goes here -->
-</div>
 
 <div *ngIf="activeTab==='patients'">
     <h2 class="text-xl font-semibold mb-4">👨‍⚕️ Patient List</h2>
